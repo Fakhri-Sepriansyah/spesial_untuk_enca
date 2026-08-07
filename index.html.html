@@ -2,93 +2,130 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Spesial Untuk Enca</title>
 <style>
-  * { box-sizing: border-box; }
-  body {
+  * { 
+    box-sizing: border-box; 
     margin: 0;
-    height: 100vh;
+    padding: 0;
+  }
+  
+  body {
+    min-height: 100vh;
+    min-height: 100dvh; /* dynamic viewport height untuk mobile */
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow: hidden;
     position: relative;
+    padding: 16px;
   }
+  
   .card {
-    background: rgba(255,255,255,0.9);
-    padding: 40px 30px;
-    border-radius: 20px;
+    background: rgba(255,255,255,0.92);
+    padding: clamp(24px, 6vw, 40px) clamp(20px, 5vw, 30px);
+    border-radius: clamp(16px, 4vw, 20px);
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    max-width: 90%;
-    width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    max-width: 100%;
+    width: min(400px, 95%);
     z-index: 2;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
+  
   h1 {
     color: #d6336c;
-    font-size: 26px;
-    margin-bottom: 10px;
+    font-size: clamp(20px, 5vw, 26px);
+    margin-bottom: clamp(6px, 1.5vw, 10px);
+    word-break: break-word;
   }
+  
   p {
     color: #555;
-    font-size: 16px;
-    margin-bottom: 30px;
+    font-size: clamp(14px, 3.5vw, 16px);
+    margin-bottom: clamp(16px, 4vw, 30px);
+    line-height: 1.5;
   }
+  
   .quote {
     font-style: italic;
-    font-size: 14px;
+    font-size: clamp(12px, 3vw, 14px);
     color: #b0507a;
     background: #fff0f3;
-    padding: 12px 16px;
+    padding: clamp(10px, 2.5vw, 12px) clamp(12px, 3vw, 16px);
     border-left: 4px solid #d6336c;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: clamp(14px, 3vw, 20px);
     text-align: left;
+    line-height: 1.6;
   }
+  
   .quote2 {
     font-style: italic;
-    font-size: 14px;
+    font-size: clamp(12px, 3vw, 14px);
     color: #b0507a;
-    margin-top: 15px;
+    margin-top: 12px;
   }
+  
   .buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: clamp(12px, 4vw, 20px);
     position: relative;
-    height: 60px;
+    min-height: 50px;
+    flex-wrap: wrap;
   }
+  
   button {
-    padding: 12px 28px;
-    font-size: 16px;
+    padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 28px);
+    font-size: clamp(14px, 3.5vw, 16px);
     border: none;
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
     transition: all 0.2s ease;
+    touch-action: manipulation; /* optimasi touch */
+    -webkit-tap-highlight-color: transparent;
+    min-width: clamp(80px, 20vw, 100px);
   }
+  
   #yesBtn {
     background: #d6336c;
     color: white;
   }
+  
   #yesBtn:hover {
     background: #b02454;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
+  
+  #yesBtn:active {
+    transform: scale(0.95);
+  }
+  
   #noBtn {
     background: #eee;
     color: #333;
     position: relative;
   }
+  
+  #noBtn:active {
+    background: #ddd;
+  }
+  
   #result {
-    margin-top: 20px;
-    font-size: 20px;
+    margin-top: clamp(16px, 4vw, 20px);
+    font-size: clamp(16px, 4vw, 20px);
     color: #d6336c;
     font-weight: bold;
     display: none;
+    line-height: 1.6;
   }
+  
   .heart {
     position: absolute;
     top: -10%;
@@ -96,11 +133,75 @@
     animation: fall linear infinite;
     z-index: 1;
     user-select: none;
+    pointer-events: none;
   }
+  
   @keyframes fall {
     to {
       transform: translateY(110vh) rotate(360deg);
-      opacity: 0.3;
+      opacity: 0.2;
+    }
+  }
+
+  /* Media Queries untuk layar sangat kecil */
+  @media (max-width: 380px) {
+    .card {
+      padding: 16px 14px;
+    }
+    h1 {
+      font-size: 18px;
+    }
+    .quote {
+      font-size: 11px;
+      padding: 8px 10px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 13px;
+      min-width: 70px;
+    }
+  }
+
+  /* Untuk layar besar (desktop) */
+  @media (min-width: 768px) {
+    .card {
+      padding: 40px 35px;
+    }
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  /* Landscape mode di HP */
+  @media (max-height: 600px) and (orientation: landscape) {
+    body {
+      padding: 8px;
+    }
+    .card {
+      padding: 14px 20px;
+      max-width: 70%;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .quote {
+      font-size: 11px;
+      padding: 6px 10px;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .buttons {
+      min-height: 40px;
+      gap: 12px;
+    }
+    button {
+      padding: 6px 14px;
+      font-size: 12px;
+      min-width: 60px;
     }
   }
 </style>
@@ -113,7 +214,7 @@
     <p>Will you be my girlfriend?</p>
     <div class="buttons">
       <button id="yesBtn" onclick="sayYes()">Iya</button>
-      <button id="noBtn" onmouseover="moveButton()">Tidak</button>
+      <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">Tidak</button>
     </div>
     <div id="result"></div>
   </div>
